@@ -16,13 +16,15 @@ Machine Learning and Ai-Capstone Project-Group 14/
 │   ├── attrition_model.joblib          # Trained model artifact
 │   ├── scaler.joblib                   # Scaler artifact
 │   └── feature_columns.joblib          # Feature name metadata
+├── presentation_slide/                 # Project presentation files
+├── report/                            # Final report documents
 ├── requirements.txt                    # Python dependencies
 ├── README.md                           # Project documentation
 ├── Makefile                            # Build and run commands
 └── setup.py                            # Package setup metadata
 ```
 
-> Recent update: the dataset folder was reorganized to `dataset/raw/`, and the latest project changes have been committed.
+> Recent update: the dataset folder was reorganized to `dataset/raw/` and the README now reflects the current repository structure.
 
 ## Getting Started
 
