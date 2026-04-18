@@ -152,4 +152,4 @@ See `requirements.txt` for a complete list. Key packages:
 
 ## Author
 
-Student Project - Thrive Africa Capstone
+Student Project - Thrive Africa Capstone Group 14
