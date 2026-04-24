@@ -1,136 +1,132 @@
 # Employee Attrition Prediction System
 
-A Streamlit web application that predicts employee attrition risk using a trained Random Forest model. The project includes data exploration, model training in a Jupyter notebook, and a dashboard for both batch and individual employee predictions.
+A Streamlit dashboard for predicting employee attrition risk using a trained Random Forest model. This repository contains the production app, dataset, model artifacts, and supporting notebook used for training, evaluation, and insights.
 
-## Current Project Structure
+## Project Overview
+
+This project is designed to help HR teams identify employees who are at higher risk of leaving the organization. It includes:
+- A Streamlit web dashboard for interactive data exploration and prediction
+- A Jupyter notebook for model training, evaluation, and artifact generation
+- Prebuilt model files for immediate use in the app
+- Support for batch and single-record attrition scoring
+
+## Repository Structure
 
 ```
-Machine Learning and Ai-Capstone Project-Group 14/
-├── app.py                              # Streamlit dashboard application
-├── notebooks/
-│   └── EmploymentAttritionPrediction_group.ipynb   # Training and evaluation notebook
-├── dataset/
-│   └── raw/
-│       └── attrition_data.csv          # IBM HR employee dataset
-├── models/
-│   ├── attrition_model.joblib          # Trained model artifact
-│   ├── scaler.joblib                   # Scaler artifact
-│   └── feature_columns.joblib          # Feature name metadata
-├── presentation_slide/                 # Project presentation files
-├── report/                            # Final report documents
-├── requirements.txt                    # Python dependencies
-├── README.md                           # Project documentation
-├── Makefile                            # Build and run commands
-└── setup.py                            # Package setup metadata
+app.py                                # Streamlit HR dashboard application
+notebooks/
+  └── EmploymentAttritionPrediction_group.ipynb   # Model training and analysis notebook
+dataset/
+  └── raw/
+      └── attrition_data.csv          # Source employee attrition dataset
+models/
+  ├── attrition_model.joblib          # Trained model artifact
+  ├── scaler.joblib                   # Feature scaler artifact
+  └── feature_columns.joblib          # Feature metadata
+presentation_slide/                   # Project presentation files
+report/                               # Final report documents
+requirements.txt                      # Python dependency list
+README.md                             # Project documentation
+Makefile                              # Run commands
+setup.py                              # Package setup metadata
 ```
 
-> Recent update: the dataset folder was reorganized to `dataset/raw/` and the README now reflects the current repository structure.
+## Prerequisites
 
-## Getting Started
+- Python 3.8 or newer
+- `pip` installed
+- Optional: a virtual environment for dependency isolation
 
-### 1. Install Dependencies
+## Installation
+
+1. Open a terminal in the project root.
+2. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Verify Your Dataset
+## Running the App
 
-Ensure `attrition_data.csv` is located in `dataset/raw/`.
-
-### 3. Train or Update the Model
-
-Run the notebook to retrain or refresh the model artifacts:
-
-```bash
-make notebook
-```
-
-Or manually run:
-
-```bash
-jupyter notebook notebooks/EmploymentAttritionPrediction_group.ipynb
-```
-
-### 4. Launch the Streamlit App
-
-```bash
-make run
-```
-
-Or run directly:
+Start the Streamlit dashboard with:
 
 ```bash
 streamlit run app.py
 ```
 
-The app opens at `http://localhost:8501` and provides:
-- **Data Explorer** for dataset summaries and attrition insights
-- **Batch Prediction** for scoring employee datasets
-- **Individual Prediction** for single employee risk assessment
-- **Model and input guidance** for required features
+Then open the local URL shown in the terminal (typically `http://localhost:8501`).
 
-## App Requirements
+## Recommended Workflow
 
-The Streamlit application uses these files from `models/`:
+1. Confirm that `dataset/raw/attrition_data.csv` exists.
+2. If you want to refresh or retrain the model, run the notebook:
+
+```bash
+jupyter notebook notebooks/EmploymentAttritionPrediction_group.ipynb
+```
+
+3. Launch the dashboard and navigate between:
+   - **Data Explorer**
+   - **Batch Prediction**
+   - **Individual Prediction**
+   - **Info**
+
+## Model Artifacts
+
+The app depends on the following files in `models/`:
 - `attrition_model.joblib`
 - `scaler.joblib`
 - `feature_columns.joblib`
 
-If any model artifacts are missing, the app will show an error message.
+If the model or scaler files are missing, the app displays an error and stops.
 
-## Model Overview
+## App Features
 
-- **Algorithm**: Random Forest Classifier
-- **Target**: `Attrition` (Yes / No)
-- **Key steps**: feature encoding, scaling, class imbalance handling, model training, and export
-- **Prediction output**: attrition risk probability and category label
+- **Data Explorer**: visualize employee distributions, attrition rates, department summaries, and other HR metrics using uploaded CSV/XLSX data.
+- **Batch Prediction**: score multiple employee records at once and export prediction results.
+- **Individual Prediction**: enter one employee profile and receive an attrition risk score.
+- **Info view**: learn about required input features and the model pipeline.
+
+## Prediction Inputs
+
+The current prediction pipeline requires these features:
+- `MonthlyIncome`
+- `JobSatisfaction`
+- `YearsAtCompany`
+- `OverTime`
+- `WorkLifeBalance`
+- `DistanceFromHome`
+
+The app preprocesses these values, scales numeric features, and applies the saved Random Forest model.
 
 ## Notebook Workflow
 
-The notebook handles the full ML pipeline:
-1. Load libraries and configure environment
-2. Read data from `dataset/raw/attrition_data.csv`
-3. Explore and visualize the dataset
-4. Preprocess features and encode categories
-5. Handle class imbalance with SMOTE
-6. Train the model and evaluate performance
-7. Save model artifacts to `models/`
-
-## How to Use the App
-
-### Data Explorer
-- Upload a CSV/XLSX dataset
-- View attrition rates and distribution charts
-- Inspect the dataset preview and clean-up summary
-
-### Batch Prediction
-- Upload employee data with the required features
-- Review predictions and high-risk employee counts
-- Download prediction results as CSV
-
-### Individual Prediction
-- Enter employee details using the form controls
-- Click `Predict Attrition Risk`
-- View risk probability and recommended interpretation
+The notebook contains the full ML pipeline and covers:
+1. data loading from `dataset/raw/attrition_data.csv`
+2. exploratory data analysis
+3. preprocessing and feature engineering
+4. handling class imbalance
+5. model training and evaluation
+6. saving artifacts for deployment
 
 ## Dependencies
 
-Install from `requirements.txt`. Key libraries include:
+Key libraries used in this project:
 - `streamlit`
-- `scikit-learn`
 - `pandas`
 - `numpy`
+- `scikit-learn`
 - `joblib`
 - `altair`
 - `imbalanced-learn`
+- `openpyxl`
 
 ## Notes
 
-- Keep the dataset path updated to `dataset/raw/`
-- Re-run the notebook if model artifacts are regenerated
-- The app uses the saved model files in `models/`
+- Keep source data in `dataset/raw/`.
+- Re-run the notebook if model inputs or preprocessing change.
+- The dashboard is styled for a polished HR analytics experience but can be extended for other business use cases.
 
-## Author
+## Authors
 
 Thrive Africa Capstone Group 14
